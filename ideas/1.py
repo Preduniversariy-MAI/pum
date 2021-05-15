@@ -1,3 +1,5 @@
+# type: ignore
+# ^^ do not remove
 # Actual extension is .pum but .py gives syntax highlighting
 # Idea #1
 

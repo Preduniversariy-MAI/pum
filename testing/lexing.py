@@ -1,29 +1,28 @@
+import re
 
 # Lexing
 # A way of extracting needed information from text.
+if __name__ == '__main__':
+	# For example:
+	text = "Hello, World!";
 
-# For example:
-text = "Hello, World!";
+	# Imagine that we only need the words
+	# without any punctuation.
+	expected = ["Hello", "World"];
 
-# Imagine that we only need the words
-# without any punctuation.
-expected = ["Hello", "World"];
+	# So lexing (in out example)
+	# is basically converting from `text` to `expected`.
 
-# So lexing (in out example)
-# is basically converting from `text` to `expected`.
+	from typing import ByteString
+	def remove_punct(s):
+		return re.sub(r"[^a-zA-Z]", '', s)
 
+	words = text.split()
+	final = list(map(remove_punct, words))
 
-import re
-from typing import ByteString
-def remove_punct(s):
-	return re.sub(r"[^a-zA-Z]", '', s)
-
-words = text.split()
-final = list(map(remove_punct, words))
-
-print("Lexing '" + text + "'")
-print("Expeceted:", expected)
-print("Got: ", final)
+	print("Lexing '" + text + "'")
+	print("Expeceted:", expected)
+	print("Got: ", final)
 
 # But why do we need this?
 # Because all the later stages don't
@@ -113,17 +112,19 @@ def lex(input_string):
 		index += 1
 	return tokens
 
-# Let's see if this works:
-def check_lexer(expr):
-	tokens = lex(expr)
-	print("\n-------- TEST START --------\n")
-	print("Expression: '" + expr + "'")
-	print("Result:", tokens)
-	print("\n-------- TEST END --------\n")
+if __name__ == '__main__':
 
-print("\n========= LEXING TESTS =========\n")
-list(map(check_lexer, [
-	"1 + 2",
-	"1 - 2",
-	"1 + 2 * 3 * (3 + 4)",
-]))	
+	# Let's see if this works:
+	def check_lexer(expr):
+		tokens = lex(expr)
+		print("\n-------- TEST START --------\n")
+		print("Expression: '" + expr + "'")
+		print("Result:", tokens)
+		print("\n-------- TEST END --------\n")
+
+	print("\n========= LEXING TESTS =========\n")
+	list(map(check_lexer, [
+		"1 + 2",
+		"1 - 2",
+		"1 + 2 * 3 * (3 + 4)",
+	]))	
