@@ -57,7 +57,11 @@ expression = "1 + 2"
 # implement (we might do that actually)
 
 # Now! how do we convert 1 + 2 into a tree?
+# There are many ways of doing this, but
 # I will be going over top-down parsing.
-# This is where the lexer comes in.
 
-
+class Parser:
+	def parse_atom(self):
+		# An atom is a number, a string,
+		# anything that can't really be
+		# divided further.
