@@ -83,12 +83,19 @@ def lex(input_string):
 				n += c 
 				
 				# Next character
-				index += 1
-				if index < last:
+				if index + 1 < last:
+					index += 1
 					# Check if we have reached the end.
 					c = input_string[index]
 				else:
 					break
+			else:
+				# This gets run if we did not
+				# break out of the loop above
+				# Since we incremented the index
+				# and the current character is not
+				# a didigt, we need to go back.
+				index -= 1
 
 			# Add the new token to the list.
 			tokens.append(Token("number", n))
@@ -110,6 +117,7 @@ def lex(input_string):
 
 		# Remember to increace the index.
 		index += 1
+
 	return tokens
 
 if __name__ == '__main__':
